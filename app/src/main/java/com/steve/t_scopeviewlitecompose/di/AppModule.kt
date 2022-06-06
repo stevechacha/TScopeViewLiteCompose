@@ -1,6 +1,8 @@
 package com.steve.t_scopeviewlitecompose.di
 
 import com.steve.t_scopeviewlitecompose.data.remote.KeyCloakApi
+import com.steve.t_scopeviewlitecompose.data.repositories.KeyCloakRepositoryImpl
+import com.steve.t_scopeviewlitecompose.domain.repositories.KeyCloakRepository
 import com.steve.t_scopeviewlitecompose.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -27,7 +29,12 @@ object AppModule {
                 .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }).build())
             .build()
             .create(KeyCloakApi::class.java)
+    }
 
+    @Provides
+    @Singleton
+    fun provideKeyCloakRepository(api: KeyCloakApi): KeyCloakRepository{
+        return KeyCloakRepositoryImpl(api)
     }
 
 }
