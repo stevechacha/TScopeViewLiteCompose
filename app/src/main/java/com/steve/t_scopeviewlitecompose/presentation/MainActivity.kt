@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
 import androidx.compose.ui.Modifier
+import com.ramcosta.composedestinations.DestinationsNavHost
 import com.steve.t_scopeviewlitecompose.ui.theme.TScopeViewLiteComposeTheme
 import com.steve.t_scopeviewlitecompose.ui.theme.darkGreen
 import com.steve.t_scopeviewlitecompose.windowInfo.WindowInfo
@@ -17,16 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TScopeViewLiteComposeTheme {
-
-                // A surface container using the 'background' color from the theme
-                val windowInfo = rememberWindowInfo()
-                if(windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
-
-                } else {
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-
+                setContent {
+                    TScopeViewLiteComposeTheme {
+                        Scaffold() {
+                            DestinationsNavHost(navGraph = NavGraphs.root)
+                        }
                     }
                 }
             }

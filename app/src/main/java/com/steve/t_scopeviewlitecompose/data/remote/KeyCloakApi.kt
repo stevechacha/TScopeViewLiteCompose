@@ -1,6 +1,5 @@
 package com.steve.t_scopeviewlitecompose.data.remote
 
-import com.steve.t_scopeviewlitecompose.data.response.AccessToken
 import com.steve.t_scopeviewlitecompose.data.response.KeyCloakResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -20,7 +19,7 @@ interface KeyCloakApi {
         @Field("scope") scope: String,
         @Field("username") username: String,
         @Field("password") password: String
-    ): AccessToken
+    ): KeyCloakResponse
 
     @POST("token")
     @FormUrlEncoded
@@ -28,14 +27,14 @@ interface KeyCloakApi {
         @Field("refresh_token") refreshToken: String,
         @Field("client_id")     clientId: String,
         @Field("grant_type")    grantType: String = "refresh_token"
-    ): Response<KeyCloakResponse>
+    ): KeyCloakResponse
 
     @POST("logout")
     @FormUrlEncoded
     suspend fun logout(
         @Field("client_id")     clientId: String,
         @Field("refresh_token") refreshToken: String
-    ): Response<KeyCloakResponse>
+    ): KeyCloakResponse
 
 
 }
